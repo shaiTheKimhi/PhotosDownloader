@@ -1,0 +1,9 @@
+K:\Kdocuments\todel\downloader\downloader\bin\Debug\downloader.exe.config
+K:\Kdocuments\todel\downloader\downloader\bin\Debug\downloader.exe
+K:\Kdocuments\todel\downloader\downloader\bin\Debug\downloader.pdb
+K:\Kdocuments\todel\downloader\downloader\obj\Debug\downloader.csprojResolveAssemblyReference.cache
+K:\Kdocuments\todel\downloader\downloader\obj\Debug\downloader.Form1.resources
+K:\Kdocuments\todel\downloader\downloader\obj\Debug\downloader.Properties.Resources.resources
+K:\Kdocuments\todel\downloader\downloader\obj\Debug\downloader.csproj.GenerateResource.Cache
+K:\Kdocuments\todel\downloader\downloader\obj\Debug\downloader.exe
+K:\Kdocuments\todel\downloader\downloader\obj\Debug\downloader.pdb
