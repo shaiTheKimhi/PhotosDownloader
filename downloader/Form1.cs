@@ -30,8 +30,8 @@ namespace downloader
             int line = 0;
             int i = 0;
             string url = "https://www.google.com/search?q=" + textBox1.Text + "&tbm=isch";
-            //int len = int.Parse(textBox2.Text);
-            List<string> images = GetUrl(SyncHttpRequest(url), 8);
+            int len = int.Parse(textBox2.Text);
+            List<string> images = GetUrl(SyncHttpRequest(url), len);
             Point pos = zero.Location;
             foreach(string item in images)
             {
@@ -113,7 +113,7 @@ namespace downloader
         /// </summary>
         /// <param name="html"></param>
         /// <returns></returns>
-        private List<String> GetUrl(string html, int i = -1)
+        private List<String> GetUrl(string html, int i = int.MaxValue)
         {
             var urls = new List<string>();
             int index = html.IndexOf("class=\"images_table\"", StringComparison.Ordinal);
