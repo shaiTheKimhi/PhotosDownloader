@@ -21,7 +21,6 @@ namespace downloader
         List<PictureBox> pictures = new List<PictureBox>();
         public string url = "";
         public int ImagesLimit = int.MaxValue;
-        public bool pause = false;
         public Form1()
         {
             InitializeComponent();
@@ -32,21 +31,24 @@ namespace downloader
             //Getting data from popup
             InputPopup f = new InputPopup(this);
             this.Enabled = false;
-            this.pause = true;
             f.Show();
             this.Enabled = true;
             //Now this.url and this.ImagesLimit should contain needed data
 
+           
+        }
+        public void PopupEntry()
+        {
             //Makes http request
             bool loaded = pictures.Count != 0;
             int index = 0;
             int line = 0;
             int i = 0;
-            string url = "https://www.google.com/search?q=" + textBox1.Text + "&tbm=isch";
-            int len = int.Parse(textBox2.Text);
+            string url = "https://www.google.com/search?q=" + this.url+ "&tbm=isch";
+            int len = this.ImagesLimit;
             List<string> images = GetUrl(SyncHttpRequest(url), len);
             Point pos = zero.Location;
-            foreach(string item in images)
+            foreach (string item in images)
             {
                 byte[] arr = GetImage(item);
                 if (!loaded)
@@ -61,7 +63,7 @@ namespace downloader
                     {
                         pos.X = zero.Location.X;
                         pos.Y = zero.Location.Y + (y + 10) * (line++);
-                        if(pos.Y > this.Height)
+                        if (pos.Y > this.Height)
                         {
                             return;
                         }

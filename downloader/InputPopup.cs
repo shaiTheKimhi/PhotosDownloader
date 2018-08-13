@@ -28,7 +28,7 @@ namespace downloader
         {
             ((Form1)this.sender).url = textBox1.Text;
             ((Form1)this.sender).ImagesLimit = int.Parse(textBox2.Text);
-            ((Form1)this.sender).pause = false;
+            ((Form1)this.sender).PopupEntry();
             this.Close();
         }
         private bool checkUrl(string url)
