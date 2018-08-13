@@ -17,7 +17,7 @@ namespace downloader
 {
     public partial class Form1 : Form
     {
-        const int x = 200, y = 150;
+        const int x = 100, y = 75;
         List<PictureBox> pictures = new List<PictureBox>();
         public string url = "";
         public int ImagesLimit = int.MaxValue;
