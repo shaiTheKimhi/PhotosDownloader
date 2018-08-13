@@ -56,15 +56,18 @@ namespace downloader
                     using (var ms = new MemoryStream(arr))
                     {
                         //pictureBox1.Image = Image.FromStream(ms);
-                        pictures.Add(CreateImage(Image.FromStream(ms), pos));
+                        PictureBox pic = CreateImage(Image.FromStream(ms), pos);
+                        pictures.Add(pic);
+                        this.Controls.Add(pic);
                     }
                     pos.X += x + 25;
-                    if (pos.X > this.Width)
+                    if (pos.X > this.Width - 10)
                     {
                         pos.X = zero.Location.X;
                         pos.Y = zero.Location.Y + (y + 10) * (line++);
                         if (pos.Y > this.Height)
                         {
+                            
                             return;
                         }
                     }
@@ -85,7 +88,7 @@ namespace downloader
             pic.Location = pos;
             pic.SizeMode = PictureBoxSizeMode.StretchImage;
             pic.Image = img;
-            this.Controls.Add(pic);
+            //this.Controls.Add(pic);
             return pic;
         }
         private byte[] GetImage(string url)
