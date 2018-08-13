@@ -11,6 +11,7 @@ using System.IO;
 using System.Net.Http;
 using System.Net;
 using System.Web;
+using System.Threading;
 
 namespace downloader
 {
@@ -18,6 +19,9 @@ namespace downloader
     {
         const int x = 200, y = 150;
         List<PictureBox> pictures = new List<PictureBox>();
+        public string url = "";
+        public int ImagesLimit = int.MaxValue;
+        public bool pause = false;
         public Form1()
         {
             InitializeComponent();
@@ -25,6 +29,15 @@ namespace downloader
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //Getting data from popup
+            InputPopup f = new InputPopup(this);
+            this.Enabled = false;
+            this.pause = true;
+            f.Show();
+            this.Enabled = true;
+            //Now this.url and this.ImagesLimit should contain needed data
+
+            //Makes http request
             bool loaded = pictures.Count != 0;
             int index = 0;
             int line = 0;
