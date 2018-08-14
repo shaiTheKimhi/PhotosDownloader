@@ -21,7 +21,7 @@ namespace downloader
 
         private void InputPopup_Load(object sender, EventArgs e)
         {
-            
+            this.TopMost = true;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -33,12 +33,16 @@ namespace downloader
         }
         private bool checkUrl(string url)
         {
-            //TODO :  check that url is valid
+            
             return true;
         }
         public bool isNumeric(string number)
         {
-            //TODO : check number is valid
+            foreach(char c in number)
+            {
+                if (c < '0' || c > '9')
+                    return false;
+            }
             return true;
         }
     }

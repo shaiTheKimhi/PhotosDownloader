@@ -32,13 +32,13 @@ namespace downloader
             InputPopup f = new InputPopup(this);
             this.Enabled = false;
             f.Show();
-            this.Enabled = true;
             //Now this.url and this.ImagesLimit should contain needed data
 
            
         }
         public void PopupEntry()
         {
+            this.Enabled = true;
             //Makes http request
             bool loaded = pictures.Count != 0;
             int index = 0;
@@ -67,7 +67,7 @@ namespace downloader
                         pos.Y = zero.Location.Y + (y + 10) * (line++);
                         if (pos.Y > this.Height)
                         {
-                            
+                            //TODO : enter images to waiting list and wait for entry
                             return;
                         }
                     }
@@ -110,6 +110,7 @@ namespace downloader
 
             return null;
         }
+        //TOOD : change to async http request (very important)
         private string SyncHttpRequest(string url)
         {
             string data = "";
@@ -149,6 +150,13 @@ namespace downloader
             }
             return urls;
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            button1.Visible = false;
+            button1_Click(null, null);
+        }
+
         public static Bitmap ByteToImage(byte[] blob)
         {
             MemoryStream mStream = new MemoryStream();
