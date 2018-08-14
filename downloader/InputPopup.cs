@@ -33,7 +33,12 @@ namespace downloader
         }
         private bool checkUrl(string url)
         {
-            
+            string invalid = "!@#%^&*\"";
+            foreach(char c in invalid)
+            {
+                if (url.Contains(c))
+                    return false;
+            }
             return true;
         }
         public bool isNumeric(string number)

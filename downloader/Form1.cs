@@ -111,7 +111,7 @@ namespace downloader
             return null;
         }
         //TOOD : change to async http request (very important)
-        private string SyncHttpRequest(string url)
+        public string SyncHttpRequest(string url)
         {
             string data = "";
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
