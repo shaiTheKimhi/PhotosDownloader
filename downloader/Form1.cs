@@ -17,10 +17,11 @@ namespace downloader
 {
     public partial class Form1 : Form
     {
+        const int yMargin = 10, xMargin = 25;
         const int x = 100, y = 75;
         List<PictureBox> pictures = new List<PictureBox>();
         public string url = "";
-        public int ImagesLimit = int.MaxValue;
+        public int ImagesLimit = int.MaxValue, page = 1;
         public Form1()
         {
             InitializeComponent();
@@ -42,8 +43,6 @@ namespace downloader
             //Makes http request
             bool loaded = pictures.Count != 0;
             int index = 0;
-            int line = 0;
-            int i = 0;
             string url = "https://www.google.com/search?q=" + this.url+ "&tbm=isch";
             int len = this.ImagesLimit;
             List<string> images = GetUrl(SyncHttpRequest(url), len);
@@ -60,17 +59,6 @@ namespace downloader
                         pic = CreateImage(Image.FromStream(ms), pos);
                         pictures.Add(pic);
                     }
-                    pos.X += x + 25;
-                    if (pos.X > this.Width - 10)
-                    {
-                        pos.X = zero.Location.X;
-                        pos.Y = zero.Location.Y + (y + 10) * (line++);
-                        if (pos.Y > this.Height)
-                        {
-                            continue;
-                        }
-                    }
-                    this.Controls.Add(pic);
                 }
                 else
                 {
@@ -80,6 +68,36 @@ namespace downloader
                     }
                 }
             }
+            LoadPictures();
+        }
+        private void LoadPictures()
+        {
+            int line = 0;
+            int amount = AmountOfPictures();
+            MessageBox.Show(amount.ToString());
+            Point pos = zero.Location;
+            foreach (PictureBox pic in pictures)
+            {
+                pic.Location = pos;
+                this.Controls.Add(pic);
+
+                pos.X += x + 25;
+                if (pos.X + x > this.Width)
+                {
+                    pos.X = zero.Location.X;
+                    pos.Y = zero.Location.Y + (y + 10) * (line++);
+                    if (pos.Y + y > this.Height)
+                    {
+                        //TODO: fix pictures don't get out of form
+                        return;
+                    }
+                }
+                
+            }
+        }
+        private int AmountOfPictures()
+        {
+            return (this.Size.Width - zero.Location.X / (x + xMargin)) * (this.Size.Height - zero.Location.Y / (y + yMargin));
         }
         private PictureBox CreateImage(Image img, Point pos)
         {
@@ -107,8 +125,6 @@ namespace downloader
                     return bytes;
                 }
             }
-
-            return null;
         }
         //TOOD : change to async http request (very important)
         public string SyncHttpRequest(string url)
