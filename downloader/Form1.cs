@@ -53,12 +53,12 @@ namespace downloader
                 byte[] arr = GetImage(item);
                 if (!loaded)
                 {
+                    PictureBox pic;
                     using (var ms = new MemoryStream(arr))
                     {
                         //pictureBox1.Image = Image.FromStream(ms);
-                        PictureBox pic = CreateImage(Image.FromStream(ms), pos);
+                        pic = CreateImage(Image.FromStream(ms), pos);
                         pictures.Add(pic);
-                        this.Controls.Add(pic);
                     }
                     pos.X += x + 25;
                     if (pos.X > this.Width - 10)
@@ -67,10 +67,10 @@ namespace downloader
                         pos.Y = zero.Location.Y + (y + 10) * (line++);
                         if (pos.Y > this.Height)
                         {
-                            //TODO : enter images to waiting list and wait for entry
-                            return;
+                            continue;
                         }
                     }
+                    this.Controls.Add(pic);
                 }
                 else
                 {
